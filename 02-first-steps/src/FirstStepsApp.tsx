@@ -17,9 +17,11 @@ export function FirstStepsApp() {
         <>
             <h1>Carrito de compras</h1>
 
-            {/* <ItemCounter name="Audífonos Sony" quantity={ 3 } />
+            {/* 
+            <ItemCounter name="Audífonos Sony" quantity={ 3 } />
             <ItemCounter name="iPhone 17" quantity={ 2 } />
-            <ItemCounter name="iPad Pro" quantity={ 1 } /> */}
+            <ItemCounter name="iPad Pro" quantity={ 1 } /> 
+            */}
             {
                 itemsInCart.map(({ productName, quantity }) => (
                     <ItemCounter 

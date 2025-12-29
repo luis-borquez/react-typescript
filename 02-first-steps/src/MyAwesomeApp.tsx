@@ -11,11 +11,14 @@ const myStyles: CSSProperties = {
 
 export const MyAwesomeApp = () => {
   return (
-    <>
-      <h1>{ firstName }</h1>
+    <div data-testid="div-app">
+      <h1 
+        data-testid="first-name-title"
+        className="foo"
+      >{ firstName }</h1>
       <h3 style={ myStyles }>
         { lastName }
       </h3>
-    </>
+    </div>
   );
 }
