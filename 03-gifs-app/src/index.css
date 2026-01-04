@@ -37,6 +37,10 @@ h1 {
   font-style: normal;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .search-container {
   display: flex;
   flex-direction: row;
