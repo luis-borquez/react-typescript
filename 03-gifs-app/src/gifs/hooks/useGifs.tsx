@@ -14,29 +14,34 @@ export const useGifs = () => {
     const gifsCache = useRef<Record<string, Gif[]>>({});
 
     const handleTermClicked = async (term: string) => {
+        setCurrentTopic(term);
+
         if (gifsCache.current[term]) {
-            setCurrentTopic(term);
             setGifs(gifsCache.current[term]);
             return;
         }
 
-        setCurrentTopic(term);
         const gifs = await getGifsByQuery(term);
         setGifs(gifs);
+        gifsCache.current[term] = gifs;
     }
 
     const handleSearch = async (query: string) => {
         const cleanedQuery = query.toLocaleLowerCase().trim();
         if (cleanedQuery === '') return;
-        if (searchedTerms.includes(cleanedQuery)) return;
 
-        setSearchedTerms([cleanedQuery, ...searchedTerms].slice(0, 8));
+        setCurrentTopic(cleanedQuery);
+        if (searchedTerms.includes(cleanedQuery)) {
+            setGifs(gifsCache.current[cleanedQuery]);
+            return;
+        }
 
-        const gifs = await getGifsByQuery(query);
+        setSearchedTerms((prevTerms) => [cleanedQuery, ...prevTerms].slice(0, 8));
+
+        const gifs = await getGifsByQuery(cleanedQuery);
         setGifs(gifs);
-        setCurrentTopic(query);
 
-        gifsCache.current[cleanedQuery] = gifs;        
+        gifsCache.current[cleanedQuery] = gifs;
     }
 
     return {
